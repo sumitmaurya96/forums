@@ -7,7 +7,25 @@ import Following from "./Section/Following/Following";
 import Followers from "./Section/Followers/Followers";
 
 const Profile = (props) => {
+  const { apiLink } = props;
   const [currPage, setCurrPage] = useState(1);
+
+  const [userDetails, setUserDetails] = useState({
+    fullname: "Rashmi Rashmi",
+    email: "rasmi@gmail.com",
+    phone: "999999990",
+    gender: "Female",
+    dateOfJoining: "20-Aug-2020",
+    image: "/img/Content/avatar/avatar7.png",
+  });
+
+  const handleDetailsClick = (field, value) => {
+    setUserDetails((prevDetails) => {
+      const UserDetails = { ...prevDetails };
+      UserDetails[field] = value;
+      return UserDetails;
+    });
+  };
 
   const handleNavClick = (page) => {
     setCurrPage(page);
@@ -20,7 +38,13 @@ const Profile = (props) => {
       case 2:
         return <YourForums />;
       case 3:
-        return <About />;
+        return (
+          <About
+            {...props}
+            userDetails={userDetails}
+            handleDetailsClick={handleDetailsClick}
+          />
+        );
       case 4:
         return <Following />;
       default:
@@ -36,15 +60,11 @@ const Profile = (props) => {
             <div className="fb-profile-block-thumb cover-container"></div>
             <div className="profile-img">
               <a href="#">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                  alt=""
-                  title=""
-                />
+                <img src={`${apiLink}${userDetails.image}`} alt="" title="" />
               </a>
             </div>
             <div className="profile-name">
-              <h2>Rashmi Rashmi</h2>
+              <h2>{userDetails.fullname}</h2>
             </div>
 
             <div className="fb-profile-block-menu">

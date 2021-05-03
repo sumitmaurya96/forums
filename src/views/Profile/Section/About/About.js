@@ -1,26 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const About = () => {
-  const [userDetails, setUserDetails] = useState({
-    fullname: { value: "Rashmi Rashmi", edit: true },
-    email: { value: "rasmi@gmail.com" },
-    phone: { value: "999999990", edit: false },
-    gender: { value: "Male/Female/Other", edit: false },
-  });
+const About = (props) => {
+  const { userDetails, handleDetailsClick = () => {} } = props;
+  const [editDetails, setEditDetails] = useState(false);
 
-  const handleDetailsClick = (field, value) => {
-    setUserDetails((prevDetails) => {
-      const UserDetails = { ...prevDetails };
-      UserDetails[field].value = value;
-      return UserDetails;
-    });
-  };
-
-  const handleEditClicked = (field) => {
-    setUserDetails((prevDetails) => {
-      const UserDetails = { ...prevDetails };
-      UserDetails[field].edit = !UserDetails[field].edit;
-      return UserDetails;
+  const editProfileHandler = () => {
+    setEditDetails((prevState) => {
+      return !prevState;
     });
   };
 
@@ -33,26 +19,18 @@ const About = () => {
               <div className="col-sm-3">
                 <h6 className="mb-0">Full Name</h6>
               </div>
-              <div className="col-sm-9">
-                {userDetails.fullname.edit ? (
+              <div className="col-sm-9 text-secondary">
+                {editDetails ? (
                   <input
-                    type="text text-secondary"
-                    value={userDetails.fullname.value}
+                    type="text"
+                    value={userDetails.fullname}
                     onChange={(e) => {
                       handleDetailsClick("fullname", e.target.value);
                     }}
                   />
                 ) : (
-                  <span className="col-sm-9 text-secondary">
-                    {userDetails.fullname.value}
-                  </span>
+                  <React.Fragment>{userDetails.fullname}</React.Fragment>
                 )}
-                <button
-                  className="btn btn-sm btn-outline-primary float-right"
-                  onClick={() => handleEditClicked("fullname")}
-                >
-                  Edit
-                </button>
               </div>
             </div>
             <hr />
@@ -60,94 +38,114 @@ const About = () => {
               <div className="col-sm-3">
                 <h6 className="mb-0">Email</h6>
               </div>
-              <div className="col-sm-9">
-                {userDetails.email.edit ? (
-                  <input
-                    type="text text-secondary"
-                    value={userDetails.email.value}
-                    onChange={(e) => {
-                      handleDetailsClick("email", e.target.value);
-                    }}
-                  />
-                ) : (
-                  <span className="col-sm-9 text-secondary">
-                    {userDetails.email.value}
-                  </span>
-                )}
-                <button
-                  className="btn btn-sm btn-outline-primary float-right"
-                  onClick={() => handleEditClicked("fullname")}
-                >
-                  Edit
-                </button>
-              </div>
+              <div className="col-sm-9 text-secondary">{userDetails.email}</div>
             </div>
             <hr />
             <div className="row">
               <div className="col-sm-3">
                 <h6 className="mb-0">Phone</h6>
               </div>
-              <div className="col-sm-7 text-secondary">(239) 816-9029</div>
-              <button className="btn btn-sm btn-outline-primary col-sm-2">
-                Edit
-              </button>
+              <div className="col-sm-9 text-secondary">
+                {editDetails ? (
+                  <input
+                    type="text"
+                    value={userDetails.phone}
+                    onChange={(e) => {
+                      handleDetailsClick("phone", e.target.value);
+                    }}
+                  />
+                ) : (
+                  <React.Fragment>{userDetails.phone}</React.Fragment>
+                )}
+              </div>
             </div>
             <hr />
             <div className="row">
               <div className="col-sm-3">
-                <h6 className="mb-0">Address</h6>
+                <h6 className="mb-0">Joining Date</h6>
               </div>
-              <div className="col-sm-7 text-secondary">
-                Bay Area, San Francisco, CA
+              <div className="col-sm-9 text-secondary">
+                {userDetails.dateOfJoining}
               </div>
-              <button className="btn btn-sm btn-outline-primary col-sm-2">
-                Edit
-              </button>
             </div>
             <hr />
             <div className="row">
               <div className="col-sm-3">
                 <h6 className="mb-0">Gender</h6>
               </div>
-              <div className="col-sm-7 text-secondary">
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio1"
-                    value="option1"
-                  />
-                  <label class="form-check-label" for="inlineRadio1">
-                    Male
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio2"
-                    value="option2"
-                  />
-                  <label class="form-check-label" for="inlineRadio2">
-                    Female
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio2"
-                    value="option2"
-                  />
-                  <label class="form-check-label" for="inlineRadio2">
-                    Other
-                  </label>
-                </div>
+              <div className="col-sm-9 text-secondary">
+                {editDetails ? (
+                  <React.Fragment>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="Male"
+                        onChange={(e) => {
+                          handleDetailsClick("gender", e.target.value);
+                        }}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="inlineRadio1"
+                      >
+                        Male
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="Female"
+                        onChange={(e) => {
+                          handleDetailsClick("gender", e.target.value);
+                        }}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="inlineRadio2"
+                      >
+                        Female
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="Other"
+                        onChange={(e) => {
+                          handleDetailsClick("gender", e.target.value);
+                        }}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="inlineRadio2"
+                      >
+                        Other
+                      </label>
+                    </div>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>{userDetails.gender}</React.Fragment>
+                )}
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-6 offset-sm-3 text-center">
+            <button
+              className="btn btn-outline-primary"
+              onClick={editProfileHandler}
+            >
+              {editDetails ? "Save" : "Edit"}
+            </button>
           </div>
         </div>
       </div>
