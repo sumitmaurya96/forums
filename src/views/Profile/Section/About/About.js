@@ -11,7 +11,7 @@ const About = (props) => {
   };
 
   return (
-    <div>
+    <div className="row" style={{ width: "100%" }}>
       <div className="col-md-12">
         <div className="card mb-3">
           <div className="card-body">

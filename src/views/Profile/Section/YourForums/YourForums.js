@@ -27,35 +27,41 @@ const YourForums = (props) => {
   ]);
 
   return (
-    <div className="list-group">
-      {yourForums.map((val, ind) => {
-        return (
-          <a
-            href="#"
-            key={ind}
-            className="list-group-item list-group-item-action "
-            aria-current="true"
-          >
-            <div className="d-flex w-100 justify-content-between">
-              <h5 className="mb-1">{val.title}</h5>
-              <small>
-                {Math.floor((new Date() - val.dateCreated) / (24 * 60 * 60))}{" "}
-                days ago
-              </small>
-            </div>
-            <p className="mb-1">{val.content}</p>
-            <a href="#">@{val.author}</a>
-            <div className="float-right">
-              <a href="#" className="btn btn-lg h3 text-danger">
-                <AiFillHeart /> {val.likes}
+    <div className="row" style={{ width: "100%" }}>
+      <div className="col-md-12">
+        <div className="list-group p-4">
+          {yourForums.map((val, ind) => {
+            return (
+              <a
+                href="#"
+                key={ind}
+                className="list-group-item list-group-item-action "
+                aria-current="true"
+              >
+                <div className="d-flex w-100 justify-content-between">
+                  <h5 className="mb-1">{val.title}</h5>
+                  <small>
+                    {Math.floor(
+                      (new Date() - val.dateCreated) / (24 * 60 * 60)
+                    )}{" "}
+                    days ago
+                  </small>
+                </div>
+                <p className="mb-1">{val.content}</p>
+                <a href="#">@{val.author}</a>
+                <div className="float-right">
+                  <a href="#" className="btn btn-lg h3 text-danger">
+                    <AiFillHeart /> {val.likes}
+                  </a>
+                  <a href="#" className="btn btn-lg h3 text-success ml-4">
+                    <GoCommentDiscussion /> {val.comments}
+                  </a>
+                </div>
               </a>
-              <a href="#" className="btn btn-lg h3 text-success ml-4">
-                <GoCommentDiscussion /> {val.comments}
-              </a>
-            </div>
-          </a>
-        );
-      })}
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };

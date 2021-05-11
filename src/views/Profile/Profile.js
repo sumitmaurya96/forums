@@ -9,6 +9,7 @@ import Followers from "./Section/Followers/Followers";
 const Profile = (props) => {
   const { apiLink } = props;
   const [currPage, setCurrPage] = useState(1);
+  const [display, setDisplay] = useState("none");
 
   const [userDetails, setUserDetails] = useState({
     fullname: "Rashmi Rashmi",
@@ -29,6 +30,7 @@ const Profile = (props) => {
 
   const handleNavClick = (page) => {
     setCurrPage(page);
+    toggleNavList();
   };
 
   const getPage = () => {
@@ -52,24 +54,34 @@ const Profile = (props) => {
     }
   };
 
+  const toggleNavList = () => {
+    setDisplay((prevDisplay) => {
+      return prevDisplay === "none" ? "block" : "none";
+    });
+  };
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <div className="fb-profile-block">
-            <div className="fb-profile-block-thumb cover-container"></div>
+          <div className="profile-block">
+            <div className="profile-block-thumb cover-container"></div>
             <div className="profile-img">
-              <a href="#">
-                <img src={`${apiLink}${userDetails.image}`} alt="" title="" />
-              </a>
+              <img src={`${apiLink}${userDetails.image}`} alt="" title="" />
+              <button className="btn btn-outline-secondary">Update</button>
             </div>
             <div className="profile-name">
               <h2>{userDetails.fullname}</h2>
             </div>
 
-            <div className="fb-profile-block-menu">
-              <div className="block-menu">
-                <ul className="bg-warning">
+            <div className="profile-block-menu">
+              <nav>
+                <div className="nav-mobile">
+                  <a id="nav-toggle" href="#!" onClick={toggleNavList}>
+                    <span></span>
+                  </a>
+                </div>
+                <ul className="nav-list" style={{ display: display }}>
                   <li>
                     <a href="#" onClick={() => handleNavClick(1)}>
                       Your Posts
@@ -96,10 +108,11 @@ const Profile = (props) => {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </nav>
             </div>
           </div>
-          <div>{getPage()}</div>
+
+          {getPage()}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-.fb-profile-block {
+.profile-block {
   margin: auto;
   position: relative;
   width: 100%;
@@ -8,18 +8,21 @@
   background: -webkit-radial-gradient(bottom, #73d6f5 12%, #1e90ff);
   background: radial-gradient(at bottom, #73d6f5 12%, #1e90ff);
 }
-.fb-profile-block-thumb {
+
+.profile-block-thumb {
   display: block;
   height: 315px;
   overflow: hidden;
   position: relative;
   text-decoration: none;
 }
-.fb-profile-block-menu {
+
+.profile-block-menu {
   border: 1px solid #d3d6db;
   border-radius: 0 0 3px 3px;
 }
-.profile-img a {
+
+.profile-img img {
   bottom: 15px;
   box-shadow: none;
   display: block;
@@ -29,21 +32,30 @@
   height: 160px;
   width: 160px;
   background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
-  z-index: 9;
-}
-.profile-img img {
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
-  height: 158px;
-  padding: 5px;
-  width: 158px;
+  z-index: 9;
 }
+
+.profile-img button {
+  bottom: 45px;
+  display: block;
+  left: 65px;
+  padding: 1px;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
 .profile-name {
-  bottom: 60px;
+  bottom: 45px;
   left: 200px;
   position: absolute;
 }
+
 .profile-name h2 {
   color: #fff;
   font-size: 24px;
@@ -53,37 +65,139 @@
   position: relative;
   text-transform: uppercase;
 }
-.fb-profile-block-menu {
+
+.profile-block-menu {
   height: 44px;
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
-.block-menu {
-  clear: right;
-  padding-left: 205px;
+
+nav {
+  float: right;
 }
-.block-menu ul {
+
+nav ul {
+  list-style: none;
   margin: 0;
   padding: 0;
 }
-.block-menu ul li {
-  display: inline-block;
-}
-.block-menu ul li a {
-  border-right: 1px solid #e9eaed;
+
+nav ul li {
   float: left;
-  font-size: 14px;
-  font-weight: bold;
-  height: 42px;
-  line-height: 3;
-  padding: 0 17px;
   position: relative;
-  vertical-align: middle;
-  white-space: nowrap;
-  color: #4b4f56;
-  text-transform: capitalize;
+  margin-left: 1px;
 }
-.block-menu ul li:first-child a {
-  border-left: 1px solid #e9eaed;
+
+nav ul li a,
+nav ul li a:visited {
+  display: block;
+  padding: 0 20px;
+  line-height: 44px;
+  background: #eea70e;
+  color: black;
+  text-decoration: none;
 }
+
+nav ul li a:hover,
+nav ul li a:visited:hover {
+  background: #2ab1ce;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+nav ul li a:not(:only-child):after,
+nav ul li a:visited:not(:only-child):after {
+  padding-left: 4px;
+  content: " ▾";
+}
+
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #262626;
+  height: 44px;
+  width: 44px;
+}
+
+@media only screen and (max-width: 798px) {
+  .nav-mobile {
+    display: block;
+  }
+
+  nav {
+    width: 100%;
+    padding: 70px 0 15px;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  nav ul li {
+    float: none;
+    margin-top: 1px;
+  }
+
+  nav ul li a {
+    padding: 15px;
+    line-height: 20px;
+    padding-left: 25%;
+  }
+}
+
+@media screen and (min-width: 799px) {
+  .nav-list {
+    display: block !important;
+  }
+}
+
+#nav-toggle {
+  position: absolute;
+  left: 8px;
+  top: 9px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+}
+
+#nav-toggle span,
+#nav-toggle span:before,
+#nav-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 4px;
+  width: 28px;
+  background: #ffffff;
+  position: absolute;
+  display: block;
+  content: "";
+  transition: all 300ms ease-in-out;
+}
+
+#nav-toggle span:before {
+  top: -10px;
+}
+
+#nav-toggle span:after {
+  bottom: -10px;
+}
+
+/*
+#nav-toggle.active span {
+  background-color: transparent;
+}
+
+#nav-toggle.active span:before,
+#nav-toggle.active span:after {
+  top: 0;
+}
+
+#nav-toggle.active span:before {
+  transform: rotate(45deg);
+}
+
+#nav-toggle.active span:after {
+  transform: rotate(-45deg);
+}
+*/
