@@ -48,9 +48,39 @@ const Profile = (props) => {
           />
         );
       case 4:
-        return <Following />;
+        return (
+          <Following
+            followings={[
+              {
+                username: "jnvudayju",
+                firstname: "Uday",
+                lastname: "Yadav",
+              },
+              {
+                username: "iqbalanjum78",
+                firstname: "Iqbal",
+                lastname: "Anjum",
+              },
+            ]}
+          />
+        );
       default:
-        return <Followers />;
+        return (
+          <Followers
+            followers={[
+              {
+                username: "jnvnrnsingh",
+                firstname: "Anant",
+                lastname: "Singh",
+              },
+              {
+                username: "zishanparwez98",
+                firstname: "Zishan",
+                lastname: "Parwez",
+              },
+            ]}
+          />
+        );
     }
   };
 
